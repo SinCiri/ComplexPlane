@@ -2,8 +2,8 @@
 
 
 int main() {
-	VideoMode vm(VideoMode::getDesktopMode().height / 2, VideoMode::getDesktopMode().width/2);
-	ComplexPlane plane(VideoMode::getDesktopMode().height / 2, VideoMode::getDesktopMode().width / 2);
+	VideoMode vm(1920/2, 1080/2);
+	ComplexPlane plane(1920/2, 1080/2);
 	RenderWindow window(vm, "WINDOW", Style::Default);
 
 	while (window.isOpen()) {
