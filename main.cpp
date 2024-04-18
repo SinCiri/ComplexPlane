@@ -2,7 +2,7 @@
 
 
 int main() {
-	VideoMode vm(VideoMode::getDesktopMode().height / 2, VideoMode::getDesktopMode().width/4);
+	VideoMode vm(VideoMode::getDesktopMode().height / 2, VideoMode::getDesktopMode().width/2);
 	ComplexPlane plane(VideoMode::getDesktopMode().height / 2, VideoMode::getDesktopMode().width / 2);
 	RenderWindow window(vm, "WINDOW", Style::Default);
 
@@ -11,10 +11,14 @@ int main() {
 		while (window.pollEvent(aevent)) {
 			//Handle player input
 			if (aevent.type == Event::MouseButtonPressed) {
-				if (aevent.type == Mouse::Button::Left) {
-					plane.setMouseLocation(Mouse::getPosition());
+				if (Mouse::isButtonPressed(Mouse::Left)) {
+					cout << "Click" << endl;
+					plane.setCenter(Mouse::getPosition());
 
 				}
+			}
+			if (aevent.type == Event::MouseMoved) {
+				plane.setMouseLocation(Mouse::getPosition());
 			}
 
 			//handle closing
@@ -25,6 +29,9 @@ int main() {
 				window.close();
 			}
 		}
+		window.clear();
+		window.display();
+		
 
 		//handle drawing
 	}

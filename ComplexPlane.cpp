@@ -37,22 +37,33 @@ void ComplexPlane::zoomOut() {
 }
 
 void ComplexPlane::setCenter(Vector2i mousePixel) {
-
+	m_plane_center = mapPixelToCoord(mousePixel);
+	m_state = CALCULATING;
+	cout << "X center: " << m_plane_center.x << "\t Y center: " << m_plane_center.y << endl;
 }
 
+//not too sure if this is working correctly
 Vector2f ComplexPlane::mapPixelToCoord(Vector2i mousePixel) {
 	Vector2f mouseLocation;
-
-	mouseLocation.x = ((mousePixel.x) * (m_pixel_size.x)) * (m_pixel_size.x - m_plane_size.x) + (m_plane_size.y);
-	mouseLocation.y = ((mousePixel.y) * (m_pixel_size.y)) * (m_pixel_size.y - m_plane_size.x) + (m_plane_size.y);
-	cout << "X: " << mouseLocation.x << "\tY: " << mouseLocation.y << endl;
+	mouseLocation.x = ((float(mousePixel.x)) / (m_pixel_size.x)) * (m_plane_size.x) + (m_plane_center.x - m_plane_size.x / 2.0);
+	mouseLocation.y = ((float(mousePixel.y)) / (m_pixel_size.y)) * ( m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0);
+	cout << "x: " << mouseLocation.x << "\t y: " << mouseLocation.y << endl;
 	return mouseLocation;
 }
 
-void ComplexPlane::setMouseLocation(Vector2i mousePixel){}
+void ComplexPlane::setMouseLocation(Vector2i mousePixel){
+	m_mouseLocation = mapPixelToCoord(mousePixel);
+	cout << "xloc: " << m_mouseLocation.x << "\tyloc: " << m_mouseLocation.y << endl;
+}
 //Melody
 void ComplexPlane::loadText(Text& text) {}
 void ComplexPlane::updateRender() {}
 
 int ComplexPlane::countIterationsCoord(Vector2f coords) { return 1; }
-void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b) {}
+
+
+void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b) {
+	//calculate j+i*pixelwidth while passing argument into function
+	m_vArray[count].color = {r, g, b};
+	m_state = DISPLAYING;
+}
