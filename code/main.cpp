@@ -14,7 +14,11 @@ int main() {
 				if (Mouse::isButtonPressed(Mouse::Left)) {
 					cout << "Click" << endl;
 					plane.setCenter(Mouse::getPosition());
-
+					plane.zoomIn();
+				}
+				if (Mouse::isButtonPressed(Mouse::Right)) {
+					plane.setCenter(Mouse::getPosition());
+					plane.zoomOut();
 				}
 			}
 			if (aevent.type == Event::MouseMoved) {
@@ -30,6 +34,7 @@ int main() {
 			}
 		}
 		window.clear();
+		window.draw(plane);
 		window.display();
 		
 
