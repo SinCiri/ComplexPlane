@@ -33,6 +33,7 @@ int main() {
 				window.close();
 			}
 		}
+		plane.updateRender();
 		window.clear();
 		window.draw(plane);
 		window.display();

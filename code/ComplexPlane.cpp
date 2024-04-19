@@ -45,12 +45,12 @@ void ComplexPlane::setCenter(Vector2i mousePixel) {
 //not too sure if this is working correctly
 Vector2f ComplexPlane::mapPixelToCoord(Vector2i mousePixel) {
 	// cout << "mouse  X Actual: " << mousePixel.x << "\t\t mouse Y Actual: " << mousePixel.y << endl;
-	Vector2f mouseLocation;
+	 Vector2f mouseLocation;
 	// cout << "pixel Size X: " << m_pixel_size.x << "\t\t pixel Size Y: " << m_pixel_size.y << endl;
 	// cout << "plane size X: " << m_plane_size.x << "\t\t plane Size Y: " << m_plane_size.y << endl;
 	// cout << "plane Center X: " << m_plane_center.x << "\t\t Plane Center Y: " << m_plane_center.y << endl;
 	mouseLocation.x = ((float(mousePixel.x - 0)) / (m_pixel_size.x - 0)) * (m_plane_size.x) + (m_plane_center.x - m_plane_size.x / 2.0);
-	mouseLocation.y = ((float(mousePixel.y)) / (m_pixel_size.y)) * ( m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0);
+	mouseLocation.y = ((float(mousePixel.y - 0)) / (m_pixel_size.y - 0)) * (m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0);
 	// cout << "x: " << mouseLocation.x << "\t y: " << mouseLocation.y << endl;
 	return mouseLocation;
 }
@@ -60,14 +60,16 @@ void ComplexPlane::setMouseLocation(Vector2i mousePixel){
 }
 //Melody
 void ComplexPlane::loadText(Text& text) {}
-void ComplexPlane::updateRender() {}
+void ComplexPlane::updateRender() {
+	
+}
 
 int ComplexPlane::countIterationsCoord(Vector2f coords) { 
-	complex<float> c = (coords.x, coords.y);
-	complex<float> z = (0,0);
+	complex<float> c (coords.x, coords.y);
+	complex<float> z (0 ,0);
 	size_t i = 0;
 	for (i = 0; i < MAX_ITER; i++) {
-		z = z*z+c;
+		z = z*z + c;
 		if (abs(z) > 2.0) {
 			return i;
 		}
@@ -79,18 +81,18 @@ int ComplexPlane::countIterationsCoord(Vector2f coords) {
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b) {
 	if (count == MAX_ITER) {
-		r = 0; g = 0; b = 0;
+		r = 0; b = 0; g = 0;
 	}
-	else if (0 <= count && count <15) {
-		r = 15; g = 55; b = 75;
+	else if (0<count && count<10) {
+		r = 51; b = 34; g = 66;
 	}
-	else if (15 <= count && count < 35) {
-		r = 55; g = 14; b = 155;
+	else if (11 < count && count < 24) {
+		r = 65; b = 155; g = 55;
 	}
-	else if (35<= count && count < 55 ) {
-		r = 15; g = 155; b = 200;
+	else if (25 < count && count < 50) {
+		r = 42; g = 44; b = 86;
 	}
 	else {
-		r = 100; b = 123; g = 200;
+		r = 144; b = 23; g = 44;
 	}
 }
