@@ -1,22 +1,45 @@
 #include "ComplexPlane.h"
 
 
+int width = VideoMode::getDesktopMode().width;
+int height = VideoMode::getDesktopMode().height;
+
+VideoMode vm(width /2, height /2);
+ComplexPlane plane(width /2, height /2);
+RenderWindow window(vm, "WINDOW", Style::Default);
+
+Text text;
+Font font;
+
+
 int main() {
-	VideoMode vm(1920/2, 1080/2);
-	ComplexPlane plane(1920/2, 1080/2);
-	RenderWindow window(vm, "WINDOW", Style::Default);
+	font.loadFromFile("type_writer_font.ttf");
+	text.setFont(font);
+	text.setCharacterSize(15);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(0, 0);
+	bool update = false;
 
 	while (window.isOpen()) {
 		Event aevent;
-		while (window.pollEvent(aevent)) {
+		if (window.pollEvent(aevent)) {
 			//Handle player input
 			if (aevent.type == Event::MouseButtonPressed) {
-				if (Mouse::isButtonPressed(Mouse::Left)) {
-					cout << "Click" << endl;
-					plane.setCenter(Mouse::getPosition());
-
+				plane.setCenter(Mouse::getPosition());
+				update = true;
+				//zoom in
+				if (Mouse::isButtonPressed(Mouse::Left)) {	
+					cout << "Left click" << endl;
+					plane.zoomIn();
 				}
+				//zoom out
+				else if (Mouse::isButtonPressed(Mouse::Right)) {
+					cout << "Right click" << endl;
+					plane.zoomOut();
+				}
+				
 			}
+			//track mouse position
 			if (aevent.type == Event::MouseMoved) {
 				plane.setMouseLocation(Mouse::getPosition());
 			}
@@ -29,11 +52,19 @@ int main() {
 				window.close();
 			}
 		}
-		window.clear();
-		window.display();
-		
+
+		//handle updating the scene
+		if (update) {
+			plane.updateRender();
+			plane.loadText(text);
+			update = false;
+		}
 
 		//handle drawing
+		window.clear();
+		window.draw(plane);
+		window.draw(text);
+		window.display();
 	}
 
 	return 0;
