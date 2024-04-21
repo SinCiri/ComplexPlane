@@ -51,7 +51,7 @@ Vector2f ComplexPlane::mapPixelToCoord(Vector2i mousePixel) {
 	// cout << "plane Center X: " << m_plane_center.x << "\t\t Plane Center Y: " << m_plane_center.y << endl;
 	mouseLocation.x = ((float(mousePixel.x - 0)) / (m_pixel_size.x - 0)) * (m_plane_size.x) + (m_plane_center.x - m_plane_size.x / 2.0);
 	mouseLocation.y = ((float(mousePixel.y - 0)) / (m_pixel_size.y - 0)) * (m_plane_size.y) + (m_plane_center.y - m_plane_size.y / 2.0);
-	// cout << "x: " << mouseLocation.x << "\t y: " << mouseLocation.y << endl;
+	cout << "x: " << mouseLocation.x << "\t y: " << mouseLocation.y << endl;
 	return mouseLocation;
 }
 
