@@ -45,7 +45,7 @@ void ComplexPlane::setCenter(Vector2i mousePixel) {
 //not too sure if this is working correctly
 Vector2f ComplexPlane::mapPixelToCoord(Vector2i mousePixel) {
 	// cout << "mouse  X Actual: " << mousePixel.x << "\t\t mouse Y Actual: " << mousePixel.y << endl;
-	Vector2f mouseLocation;
+	 Vector2f mouseLocation;
 	// cout << "pixel Size X: " << m_pixel_size.x << "\t\t pixel Size Y: " << m_pixel_size.y << endl;
 	// cout << "plane size X: " << m_plane_size.x << "\t\t plane Size Y: " << m_plane_size.y << endl;
 	// cout << "plane Center X: " << m_plane_center.x << "\t\t Plane Center Y: " << m_plane_center.y << endl;
