@@ -93,16 +93,22 @@ void ComplexPlane::updateRender() {
 }
 
 int ComplexPlane::countIterationsCoord(Vector2f coords) {
+	//iterations is there to show what the calculation is doing
+	//without the iterations variable it always exits the for loop at i=0
+	int iterations = 0;
 	complex<float> c(coords.x, coords.y);
 	complex<float> z(0, 0);
 	size_t i = 0;
 	for (i = 0; i < MAX_ITER; i++) {
+		cout << "i: " << i << endl;
+		cout << "z: " << z << endl;
 		z = z * z + c;
+		cout << "z * z + c: " << z << endl << endl;
 		if (abs(z) > 2.0) {
-			return i;
+			iterations = i;
 		}
 	}
-	return i;
+	return iterations;
 }
 
 

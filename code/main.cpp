@@ -28,7 +28,7 @@ int main() {
 				plane.setCenter(Mouse::getPosition());
 				update = true;
 				//zoom in
-				if (Mouse::isButtonPressed(Mouse::Left)) {	
+				if (Mouse::isButtonPressed(Mouse::Left)) {
 					cout << "Left click" << endl;
 					plane.zoomIn();
 				}
@@ -37,8 +37,8 @@ int main() {
 					cout << "Right click" << endl;
 					plane.zoomOut();
 				}
-				
 			}
+			
 			//track mouse position
 			if (aevent.type == Event::MouseMoved) {
 				plane.setMouseLocation(Mouse::getPosition());
@@ -53,7 +53,7 @@ int main() {
 			}
 		}
 
-		//handle updating the scene
+		//handle updating
 		if (update) {
 			plane.updateRender();
 			plane.loadText(text);
@@ -65,7 +65,7 @@ int main() {
 		window.draw(plane);
 		window.draw(text);
 		window.display();
+		
 	}
-
 	return 0;
 }
