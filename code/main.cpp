@@ -18,24 +18,25 @@ int main() {
 	text.setCharacterSize(15);
 	text.setFillColor(sf::Color::White);
 	text.setPosition(0, 0);
-	bool update = false;
+	
+
 
 	while (window.isOpen()) {
 		Event aevent;
 		if (window.pollEvent(aevent)) {
+			
 			//Handle player input
 			if (aevent.type == Event::MouseButtonPressed) {
-				plane.setCenter(Mouse::getPosition());
-				update = true;
 				//zoom in
 				if (Mouse::isButtonPressed(Mouse::Left)) {
-					cout << "Left click" << endl;
+					plane.setCenter(Mouse::getPosition());
 					plane.zoomIn();
 				}
 				//zoom out
 				else if (Mouse::isButtonPressed(Mouse::Right)) {
-					cout << "Right click" << endl;
+					plane.setCenter(Mouse::getPosition());
 					plane.zoomOut();
+					
 				}
 			}
 			
@@ -54,13 +55,9 @@ int main() {
 		}
 
 		//handle updating
-		if (update) {
-			plane.updateRender();
-			plane.loadText(text);
-			update = false;
-		}
-
-		//handle drawing
+		plane.updateRender();
+		plane.loadText(text);
+		//handle drawing		
 		window.clear();
 		window.draw(plane);
 		window.draw(text);
